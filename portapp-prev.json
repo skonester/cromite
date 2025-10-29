@@ -1,14 +1,14 @@
 {
   "info": {
-    "id": "ungoogled-chromium-portable",
+    "id": "cromite-portable",
     "guid": "{D0116FB7-CD20-4BDA-9248-3E6F5FB6B1B7}",
-    "name": "Ungoogled Chromium Portable",
-    "version": "130.0.6723.122",
-    "release": "19",
-    "date": "2024/11/10 17:17:24",
-    "publisher": "CrazyMax",
-    "url": "https://github.com/portapps/ungoogled-chromium-portable",
-    "portapps_version": "3.14.1"
+    "name": "Cromite Portable",
+    "version": "141.0.7390.127",
+    "release": "1",
+    "date": "2025/10/29 17:17:24",
+    "publisher": "Skonester",
+    "url": "https://github.com/skonester/cromite",
+    "portapps_version": "1.0"
   },
   "win_version": {
     "Major": 10,
