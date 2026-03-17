@@ -9,8 +9,3 @@ Cromite is a [Chromium](https://www.chromium.org/Home) fork based on [Bromite](h
 
 Cromite is available for Android arm64-v8a, arm32-v7a and x86_64, Android 10 and above, Windows and Linux 64bit.
 
-
-
-Fork
-
-Custom Portable version of Cromite with an updater that pulls latest Cromite by default.
