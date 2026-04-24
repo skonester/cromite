@@ -53,7 +53,16 @@ function Update-App {
         
         Write-Host "Extracting to $AppDir..." -ForegroundColor Cyan
         if (Test-Path $AppDir) { Remove-Item $AppDir -Recurse -Force }
+        New-Item -ItemType Directory -Path $AppDir | Out-Null
         Expand-Archive -Path $ZipPath -DestinationPath $AppDir -Force
+        
+        # Flatten the 'chrome-win' directory if it exists
+        $NestedDir = Join-Path $AppDir "chrome-win"
+        if (Test-Path $NestedDir) {
+            Write-Host "Flattening directory structure..." -ForegroundColor Cyan
+            Get-ChildItem -Path $NestedDir | Move-Item -Destination $AppDir -Force
+            Remove-Item $NestedDir -Force
+        }
         
         Remove-Item $ZipPath
         Write-Host "Update Complete!" -ForegroundColor Green
@@ -109,6 +118,10 @@ function Build-Launcher {
 
     # 1. Extract Icon from Cromite
     $AppExe = Join-Path $AppDir "chrome.exe"
+    if (-not (Test-Path $AppExe)) {
+        $AppExe = Join-Path $AppDir "chrome-win\chrome.exe"
+    }
+
     $IconPath = Join-Path $BaseDir "app.ico"
     if (Test-Path $AppExe) {
         Write-Host "Extracting icon from $AppExe..." -ForegroundColor Cyan

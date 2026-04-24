@@ -27,7 +27,7 @@ Below is a breakdown of the core files and their purpose in this environment:
 ### 🚀 Launchers & Executables
 | File | Description |
 | :--- | :--- |
-| `Cromite Portable.exe` | **Native C# Launcher.** The high-performance entry point (6KB) that directly executes Cromite with hardcoded privacy and portability flags. |
+| `Cromite Portable.exe` | **Native C# Launcher.** Located in the **root folder**, this high-performance entry point (6KB) directly executes Cromite from the `\app` directory with hardcoded privacy and portability flags. |
 | `Cromite.bat` | A fallback batch script that launches Cromite directly from the `\app` folder with a full suite of privacy flags. |
 
 ### 🛠️ Management & Setup

@@ -20,6 +20,16 @@ namespace CromitePortable
             string appPath = Path.Combine(baseDir, AppFolderName, ExecutableName);
             string dataPath = Path.Combine(baseDir, DataFolderName);
 
+            // 0. Smart Detection: Check for nested 'chrome-win' folder
+            if (!File.Exists(appPath))
+            {
+                string nestedPath = Path.Combine(baseDir, AppFolderName, "chrome-win", ExecutableName);
+                if (File.Exists(nestedPath))
+                {
+                    appPath = nestedPath;
+                }
+            }
+
             // 1. Ensure Data Directory exists for true portability
             if (!Directory.Exists(dataPath))
             {
