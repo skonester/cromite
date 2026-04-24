@@ -27,40 +27,39 @@ Below is a breakdown of the core files and their purpose in this environment:
 ### 🚀 Launchers & Executables
 | File | Description |
 | :--- | :--- |
-| `Cromite Portable.exe` | The primary entry point. A lightweight wrapper that initializes the environment and launches `chrlauncher.exe`. |
-| `Cromite.bat` | A fallback batch script that launches Cromite directly from the `\app` folder with a full suite of privacy and portability flags. |
-| `chrlauncher.exe` | A specialized launcher that handles the heavy lifting: downloading the latest Cromite binaries and managing the process. |
+| `Cromite Portable.exe` | **Native C# Launcher.** The high-performance entry point (6KB) that directly executes Cromite with hardcoded privacy and portability flags. |
+| `Cromite.bat` | A fallback batch script that launches Cromite directly from the `\app` folder with a full suite of privacy flags. |
 
 ### 🛠️ Management & Setup
 | File | Description |
 | :--- | :--- |
-| `Update-Cromite.ps1` | **The Master Control Script.** Run this to check for updates, inject privacy features into the configuration, or set up the portable data structure. |
+| `Update-Cromite.ps1` | **The Master Control Script.** Handles browser updates, privacy flag injection, environment cleanup, and can **rebuild the native launcher** from source. |
 | `SetDefaultBrowser.bat` | Automates the process of registering this portable Cromite instance as your system's default browser. |
-| `LauncherSource.cs` | The C# source code for `Cromite Portable.exe`, provided for transparency and custom builds. |
+| `LauncherSource.cs` | The C# source code for the native launcher, provided for transparency and automated builds. |
 
 ### ⚙️ Configuration & Metadata
 | File | Description |
 | :--- | :--- |
-| `chrlauncher.ini` | The main configuration for the launcher. Contains the "Ton of Features" command-line flags and update URLs. |
+| `app.ico` | The official Cromite icon, extracted from the browser binary and applied to the native launcher. |
 | `portapp.json` | Metadata about the portable application, including versioning and publisher info. |
-| `cromite-portable.sample.yml` | A sample configuration file used for environment definitions. |
-| `portable.dat` | A marker file used by some components to enforce portable behavior. |
-| `cromite.code-workspace` | VS Code workspace configuration for developers contributing to the project. |
+| `Logo.png` | A high-resolution 3D logo used for documentation and branding. |
+| `cromite.code-workspace` | VS Code workspace configuration for developers. |
 
 ---
 
 ## 🌟 Key Features of this Environment
-
-- **Zero System Footprint**: All user profiles, cache, and settings are stored in a local `\data` directory.
-- **Privacy Hardened**: Pre-configured with over 20+ privacy-focused flags (e.g., disabled telemetry, pings, and background networking).
-- **Auto-Updating**: Integrated with `chrlauncher` and the master PowerShell script to keep your browser current with the latest `uazo/cromite` releases.
+- **Zero System Footprint**: All user profiles, cache, and settings are strictly stored in a local `\data` directory.
+- **Native C# Launcher**: Replaces heavy third-party launchers with a purpose-built, 6KB native binary for maximum speed and security.
+- **Automated Branding**: `Update-Cromite.ps1` automatically extracts the official browser icon and applies it to your launcher.
+- **Privacy Hardened**: Pre-configured with the "Evolution Engine" suite of 20+ privacy flags (no telemetry, no pings, no background networking).
+- **Auto-Updating**: Integrated PowerShell management to keep your browser and launcher current with the latest `uazo/cromite` releases.
 - **Dark Mode by Default**: Forced dark mode and WebUI dark mode enabled out of the box.
 
 ## 🛠️ Getting Started
-
-1. **Initialize**: Run `Update-Cromite.ps1` and select `[1] Check for Updates` to download the latest browser binaries into the `\app` folder.
-2. **Configure**: Select `[2] Apply Features` in the script to ensure all privacy flags are active.
-3. **Launch**: Use `Cromite Portable.exe` to start browsing.
+1. **Initialize**: Run `Update-Cromite.ps1` and select `[1] Check for Updates` to download the browser.
+2. **Setup**: Select `[3] Setup Portable Environment` to clean legacy files and prepare the structure.
+3. **Build**: Select `[4] Rebuild Native Launcher` to compile your custom branded `.exe`.
+4. **Launch**: Use `Cromite Portable.exe` to start browsing.
 
 ---
 *Note: This project is a curated portable distribution and is not officially affiliated with the core Cromite/uazo team.*
