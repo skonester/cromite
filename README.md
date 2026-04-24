@@ -1,7 +1,7 @@
 # Cromite Portable (Evolution Engine)
 
 <div align="center">
-  <img src="./logo.png" width="128" alt="Cromite Logo" />
+  <img src="Logo.png" width="128" alt="Cromite Logo" />
   <br>
   
   [![Latest Release](https://img.shields.io/github/v/release/uazo/cromite?label=Cromite%20Version&color=008080&logo=chromium)](https://github.com/uazo/cromite/releases)
