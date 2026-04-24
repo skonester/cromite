@@ -43,7 +43,6 @@ Below is a breakdown of the core files and their purpose in this environment:
 | `app.ico` | The official Cromite icon, extracted from the browser binary and applied to the native launcher. |
 | `portapp.json` | Metadata about the portable application, including versioning and publisher info. |
 | `Logo.png` | A high-resolution 3D logo used for documentation and branding. |
-| `cromite.code-workspace` | VS Code workspace configuration for developers. |
 
 ---
 
