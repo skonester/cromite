@@ -1,15 +1,21 @@
 @echo off
 
-set "CHRLAUNCHER_NAME=chrlauncher"
-set "CHRLAUNCHER_NAME_SHORT=chrlauncher"
-set "CHRLAUNCHER_DESCRIPTION=Chromium portable launcher and updater"
-set "CHRLAUNCHER_PATH=%~dp0chrlauncher.exe"
+set "CHRLAUNCHER_NAME=Cromite Portable"
+set "CHRLAUNCHER_NAME_SHORT=CromitePortable"
+set "CHRLAUNCHER_DESCRIPTION=High-privacy Cromite portable browser"
+set "CHRLAUNCHER_PATH=%~dp0Cromite Portable.exe"
 set "CHRLAUNCHER_ICON=\"%CHRLAUNCHER_PATH%\",0"
 set "CHRLAUNCHER_ARGS=\"%CHRLAUNCHER_PATH%\" \"%%1\""
 
 if not exist "%CHRLAUNCHER_PATH%" (
+    set "CHRLAUNCHER_PATH=%~dp0chrlauncher.exe"
+    set "CHRLAUNCHER_ICON=\"%CHRLAUNCHER_PATH%\",0"
+    set "CHRLAUNCHER_ARGS=\"%CHRLAUNCHER_PATH%\" \"%%1\""
+)
 
-	echo ERROR: "%CHRLAUNCHER_PATH%" not found.
+if not exist "%CHRLAUNCHER_PATH%" (
+
+	echo ERROR: "Cromite Portable.exe" or "chrlauncher.exe" not found.
 
 ) else (
 
