@@ -22,9 +22,10 @@ function Show-Welcome {
     Write-Host "==========================================" -ForegroundColor Cyan
     Write-Host " [1] Check for Updates"
     Write-Host " [2] Apply 'Ton of Features' (Privacy Flags)"
-    Write-Host " [3] Setup Portable Environment"
-    Write-Host " [4] Set as Default Browser"
-    Write-Host " [5] Exit"
+    Write-Host " [3] Setup Portable Environment (Cleanup)"
+    Write-Host " [4] Rebuild Native Launcher (.exe)"
+    Write-Host " [5] Set as Default Browser"
+    Write-Host " [6] Exit"
     Write-Host "==========================================" -ForegroundColor Cyan
 }
 
@@ -97,6 +98,44 @@ function Apply-Features {
     }
 }
 
+function Build-Launcher {
+    Write-Host "Compiling Native Cromite Launcher with Icon..." -ForegroundColor Yellow
+    
+    $CscPath = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+    if (-not (Test-Path $CscPath)) {
+        Write-Error ".NET Framework Compiler (csc.exe) not found."
+        return
+    }
+
+    # 1. Extract Icon from Cromite
+    $AppExe = Join-Path $AppDir "chrome.exe"
+    $IconPath = Join-Path $BaseDir "app.ico"
+    if (Test-Path $AppExe) {
+        Write-Host "Extracting icon from $AppExe..." -ForegroundColor Cyan
+        Add-Type -AssemblyName System.Drawing
+        $icon = [System.Drawing.Icon]::ExtractAssociatedIcon($AppExe)
+        $stream = New-Object System.IO.FileStream($IconPath, [System.IO.FileMode]::Create)
+        $icon.Save($stream)
+        $stream.Close()
+    }
+
+    # 2. Build with Icon
+    $Source = Join-Path $BaseDir "LauncherSource.cs"
+    $Output = Join-Path $BaseDir "Cromite Portable.exe"
+    $IconFlag = if (Test-Path $IconPath) { "/win32icon:""$IconPath""" } else { "" }
+    
+    try {
+        $Args = @("/target:winexe", "/out:""$Output""", "/reference:System.Windows.Forms.dll,System.dll,System.Drawing.dll")
+        if ($IconFlag) { $Args += $IconFlag }
+        $Args += """$Source"""
+        
+        & $CscPath $Args
+        Write-Host "Build Successful: $Output" -ForegroundColor Green
+    } catch {
+        Write-Error "Failed to compile launcher: $_"
+    }
+}
+
 function Setup-Environment {
     Write-Host "Configuring Portable Data Directory..." -ForegroundColor Yellow
     if (-not (Test-Path $DataDir)) {
@@ -107,29 +146,16 @@ function Setup-Environment {
     # Remove ungoogled references & logs
     $LegacyFiles = @(
         "ungoogled-chromium-portable.sample.yml",
-        "log\ungoogled-chromium-portable.log"
+        "log\ungoogled-chromium-portable.log",
+        "portapp.yml",
+        "Cromite Portable.yml"
     )
     foreach ($File in $LegacyFiles) {
         $Path = Join-Path $BaseDir $File
         if (Test-Path $Path) {
             Remove-Item $Path -Force
-            Write-Host "Cleaned up legacy reference: $File" -ForegroundColor Cyan
+            Write-Host "Cleaned up legacy/obsolete reference: $File" -ForegroundColor Cyan
         }
-    }
-
-    # Ensure correct Portapp config exists
-    $YmlFile = Join-Path $BaseDir "Cromite Portable.yml"
-    if (-not (Test-Path $YmlFile)) {
-        $DefaultConfig = @"
-id: cromite-portable
-name: Cromite Portable
-common:
-    disable_log: false
-app:
-    cleanup: false
-"@
-        $DefaultConfig | Set-Content $YmlFile
-        Write-Host "Initialized Portapp configuration for Cromite." -ForegroundColor Green
     }
 }
 
@@ -141,8 +167,9 @@ while ($true) {
         "1" { Update-App }
         "2" { Apply-Features }
         "3" { Setup-Environment }
-        "4" { & "$BaseDir\SetDefaultBrowser.bat" }
-        "5" { Exit }
+        "4" { Build-Launcher }
+        "5" { & "$BaseDir\SetDefaultBrowser.bat" }
+        "6" { Exit }
     }
     Write-Host "Press any key to return to menu..."
     [void][System.Console]::ReadKey($true)
