@@ -104,11 +104,32 @@ function Setup-Environment {
         Write-Host "Created $DataDir" -ForegroundColor Green
     }
     
-    # Remove ungoogled references
-    $LegacyFile = Join-Path $BaseDir "ungoogled-chromium-portable.sample.yml"
-    if (Test-Path $LegacyFile) {
-        Remove-Item $LegacyFile -Force
-        Write-Host "Removed legacy ungoogled-chromium reference file." -ForegroundColor Cyan
+    # Remove ungoogled references & logs
+    $LegacyFiles = @(
+        "ungoogled-chromium-portable.sample.yml",
+        "log\ungoogled-chromium-portable.log"
+    )
+    foreach ($File in $LegacyFiles) {
+        $Path = Join-Path $BaseDir $File
+        if (Test-Path $Path) {
+            Remove-Item $Path -Force
+            Write-Host "Cleaned up legacy reference: $File" -ForegroundColor Cyan
+        }
+    }
+
+    # Ensure correct Portapp config exists
+    $YmlFile = Join-Path $BaseDir "Cromite Portable.yml"
+    if (-not (Test-Path $YmlFile)) {
+        $DefaultConfig = @"
+id: cromite-portable
+name: Cromite Portable
+common:
+    disable_log: false
+app:
+    cleanup: false
+"@
+        $DefaultConfig | Set-Content $YmlFile
+        Write-Host "Initialized Portapp configuration for Cromite." -ForegroundColor Green
     }
 }
 

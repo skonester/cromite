@@ -3,9 +3,9 @@
     "id": "cromite-portable",
     "guid": "{D0116FB7-CD20-4BDA-9248-3E6F5FB6B1B7}",
     "name": "Cromite Portable",
-    "version": "141.0.7390.127",
+    "version": "147.0.7727.56",
     "release": "1",
-    "date": "2025/10/29 17:17:24",
+    "date": "2026/04/23 19:35:00",
     "publisher": "Skonester",
     "url": "https://github.com/skonester/cromite",
     "portapps_version": "1.0"
@@ -13,9 +13,9 @@
   "win_version": {
     "Major": 10,
     "Minor": 0,
-    "Build": 26100
+    "Build": 28000
   },
-  "root_path": "C:\\Users\\admin\\OneDrive\\Desktop\\Cromite Portable 142.0.7444.176",
-  "app_path": "C:\\Users\\admin\\OneDrive\\Desktop\\Cromite Portable 142.0.7444.176\\app",
-  "data_path": "C:\\Users\\admin\\OneDrive\\Desktop\\Cromite Portable 142.0.7444.176\\data"
+  "root_path": "C:\\Users\\admin\\Documents\\GitHub\\cromite",
+  "app_path": "C:\\Users\\admin\\Documents\\GitHub\\cromite\\app",
+  "data_path": "C:\\Users\\admin\\Documents\\GitHub\\cromite\\data"
 }

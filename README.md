@@ -1,10 +1,22 @@
 # Cromite Portable (Evolution Engine)
 
-<a href="https://www.cromite.org">
-  <img title="Cromite - Take back your browser!" src="https://www.cromite.org/app_icon.png" width="96" alt="Cromite Logo" />
-</a>
+<div align="center">
+  <img src="./logo.png" width="128" alt="Cromite Logo" />
+  <br>
+  
+  [![Latest Release](https://img.shields.io/github/v/release/uazo/cromite?label=Cromite%20Version&color=008080&logo=chromium)](https://github.com/uazo/cromite/releases)
+  [![Downloads](https://img.shields.io/github/downloads/uazo/cromite/total?label=Downloads&color=008080&logo=github)](https://github.com/uazo/cromite/releases)
+  [![License](https://img.shields.io/github/license/uazo/cromite?color=008080)](https://github.com/uazo/cromite/blob/master/LICENSE)
+  [![Platform](https://img.shields.io/badge/Platform-Windows-blue?logo=windows)](https://github.com/skonester/cromite)
+  
+  <br>
+  <a href="https://github.com/uazo/cromite/releases/latest">
+    <img src="https://img.shields.io/badge/DOWNLOAD-CROMITE-orange?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Download Cromite" />
+  </a>
+</div>
 
 Cromite is a [Chromium](https://www.chromium.org/Home) fork based on [Bromite](https://github.com/bromite/bromite) with built-in support for ad blocking and an eye for privacy. This repository provides a **truly portable** Windows environment for Cromite, ensuring all data and configurations stay within the local folder.
+
 
 ---
 
